@@ -10,9 +10,24 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet var textFields: [UITextField]!
+    @IBOutlet weak var textView: UITextView!
+    let navigator = FormNavigator()
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+
+
+        textFields.forEach { tf in
+            self.navigator.add(control: tf)
+        }
+        navigator.add(control: textView)
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        navigator.updateToolbarWidth(view.bounds.width)
     }
 
     override func didReceiveMemoryWarning() {
